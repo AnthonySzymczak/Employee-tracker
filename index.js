@@ -1,22 +1,21 @@
 const {prompt} = require('inquirer');
-const db = require('./config')
-const consoleTable = require('console.table');
+const db = require('./config/connection')
+const cTable = require('console.table');
+const dbQuery = require('./db/utils');
 
-
-
-
-
+// "Main Menu" selections
 init();
 function init() {
-    inquirer.prompt({
+ 
+    prompt({
             type: "list",
             choices: [
-                "Add Department",
-                "Add Role",
-                "Add Employee",
-                "View Departments",
-                "View Roles",
                 "View Employees",
+                "View Roles",
+                "View Departments",
+                "Add Employee",
+                "Add Role",
+                "Add Department",
                 "Update Employee Role",
                 "Delete Employee",
                 "Delete Role",
@@ -26,20 +25,20 @@ function init() {
             message: "What would you like to do?",
             name: "selection"
         })
+        // Switch cases to respond with proper selections
         .then((answer) => {
-            
             switch (answer.selection) {
 
                 case "View Employees":
-                    viewAllEmployees();
+                    viewEmployees();
                     break;
 
                 case "View Roles":
-                    viewAllRoles();
+                    viewRoles();
                     break;
 
                 case "View Departments":
-                    viewAllDepartments();
+                    viewDepartments();
                     break;
 
                 case "Add Employee":
@@ -72,51 +71,38 @@ function init() {
 
                 case "Quit":
                     quit();
+                    break;
             }
         });
+};
+
+function viewEmployees() {
+dbQuery.viewEmployees()
+    .then(([rows]) => {
+    console.table(rows)
+    
+    }).then(() => init()) 
+    .catch((err) =>{
+        console.log(err)
+    })   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-..Query example..
----------- Query database---------
-let deletedRow = 2;
-
-db.query(`DELETE FROM books WHERE id = ?`,deletedRow, (err, result) => {
-  if (err) {
-    console.log(err);
-  }
-  console.log(result);
-});
-
------ Query database --------
-db.query('SELECT * FROM books', function (err, results) {
-  console.log(results);
-});
-
--------- Default response for any other request (Not Found)-----------
-app.use((req, res) => {
-  res.status(404).end();
-});
-
-*/
-
+function viewRoles() {
+    dbQuery.viewRoles()
+        .then(([rows]) => {
+        console.table(rows)
+        
+        }).then(() => init()) 
+        .catch((err) =>{
+            console.log(err)
+        })   
+    }
+    function viewDepartments() {
+        dbQuery.viewDepartments()
+            .then(([rows]) => {
+            console.table(rows)
+            
+            }).then(() => init()) 
+            .catch((err) =>{
+                console.log(err)
+            })   
+        }

@@ -1,8 +1,7 @@
 -- Insert name into department
-INSERT INTO department
-    (name)
-
     -- Set list of values for departments
+INSERT INTO department
+(name)
 VALUES
     ('Sales'),
     ('Engineering'),
@@ -11,10 +10,10 @@ VALUES
 
 -- Role declaratioons
 
+    --Values including Job Title, Job Salary, and Department ID 
 INSERT INTO role
     (title, salary, department_id)
 
-    --Values including Job Title, Job Salary, and Department ID 
 VALUES
     ('Sales Lead', 100000, 1),
     ('Salesperson', 80000, 1),
@@ -27,21 +26,21 @@ VALUES
 
 -- Employee Declarations
 
-INSERT INTO employee
-    (first_name, last_name, role_id, manager_id)
-
     -- Employee table seeds from Challenge example.
     --Values are as follows
             --first_name,
             --last_name,
             --role_id,
             --manager_id  
+INSERT INTO employee
+    (first_name, last_name, role_id, manager_id)
+
 VALUES
     ('John', 'Doe', 1, 3),
     ('Mike', 'Chan', 2, 1),
-    ('Ashley', 'Rodriguez', 3, NULL),
+    ('Ashley', 'Rodriguez', 3, 0),
     ('Kevin', 'Tupik', 4, 3),
-    ('Malia', 'Brown', 6, NULL),
-    ('Sarah', 'Lourd', 7, NULL),
+    ('Malia', 'Brown', 6, 0),
+    ('Sarah', 'Lourd', 7, 0),
     ('Tom', 'Allen', 8, 7),
-    ('Christian', 'Eckenrode', 9, 2)
+    ('Christian', 'Eckenrode', 9, 2);
